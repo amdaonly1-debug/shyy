@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Special Message For You 🌸</title>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Fredoka', cursive, sans-serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #fff0f5 0%, #ffe3ec 50%, #ffdee5 100%);
+            overflow: hidden;
+            text-align: center;
+            padding: 20px;
+            position: relative;
+        }
+
+        /* Cute Floating Aesthetic Elements */
+        .floating-element {
+            position: absolute;
+            bottom: -50px;
+            animation: floatUp 7s linear infinite;
+            z-index: 0;
+            pointer-events: none;
+            user-select: none;
+            opacity: 0.6;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0) rotate(0deg) scale(0.8); opacity: 0; }
+            10% { opacity: 0.6; }
+            90% { opacity: 0.6; }
+            100% { transform: translateY(-105vh) rotate(360deg) scale(1.2); opacity: 0; }
+        }
+
+        /* App Container Card */
+        .card {
+            background: rgba(255, 255, 255, 0.92);
+            padding: 45px 30px;
+            border-radius: 32px;
+            box-shadow: 0 20px 40px rgba(255, 182, 193, 0.3);
+            backdrop-filter: blur(15px);
+            max-width: 440px;
+            width: 100%;
+            transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            z-index: 10;
+            border: 4px solid #fff;
+        }
+
+        .main-gif-container {
+            font-size: 70px;
+            margin-bottom: 15px;
+            display: inline-block;
+            animation: bounce 2s infinite ease-in-out;
+        }
+
+        h1 {
+            color: #ff5c8a;
+            font-size: 1.9rem;
+            margin-bottom: 15px;
+            font-weight: 600;
+            letter-spacing: -0.5px;
+        }
+
+        p {
+            color: #7a6870;
+            font-size: 1.1rem;
+            margin-bottom: 25px;
+            line-height: 1.5;
+            padding: 0 10px;
+        }
+
+        /* Interactive Bouncy Compliment Box */
+        .cute-box {
+            background: #fff0f3;
+            padding: 15px 20px;
+            border-radius: 20px;
+            margin-bottom: 25px;
+            font-weight: 500;
+            color: #ff477e;
+            font-size: 1.05rem;
+            min-height: 65px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px dashed #ffb3c6;
+            cursor: pointer;
+            transition: transform 0.2s, background-color 0.2s;
+            box-shadow: 0 5px 10px rgba(255, 179, 198, 0.1);
+        }
+        
+        .cute-box:hover {
+            transform: scale(1.03) rotate(-1deg);
+            background: #ffe3e8;
+        }
+
+        /* Squishy Button Styles */
+        .btn-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            position: relative;
+            height: 60px;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        button {
+            padding: 14px 38px;
+            font-size: 1.15rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: transform 0.2s, background-color 0.3s, box-shadow 0.2s;
+            font-family: 'Fredoka', cursive, sans-serif;
+        }
+
+        #yes-btn {
+            background-color: #ff5c8a;
+            color: white;
+            box-shadow: 0 8px 0px #d9406b, 0 12px 20px rgba(255, 92, 138, 0.3);
+            position: relative;
+            top: 0;
+        }
+
+        #yes-btn:hover {
+            background-color: #ff477e;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 0px #d9406b, 0 14px 22px rgba(255, 92, 138, 0.35);
+        }
+
+        #yes-btn:active {
+            transform: translateY(6px);
+            box-shadow: 0 2px 0px #d9406b, 0 4px 10px rgba(255, 92, 138, 0.4);
+        }
+
+        #no-btn {
+            background-color: #e2dbdd;
+            color: #8c7e82;
+            position: absolute;
+            left: 55%;
+            box-shadow: 0 6px 0px #bdafb3;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.1);
+        }
+
+        .hidden {
+            display: none !important;
+            opacity: 0;
+        }
+
+        /* Soft Animations */
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-10px) scale(1.05); }
+        }
+
+        .sparkle-text {
+            color: #ff99b6;
+            font-size: 0.9rem;
+            margin-top: -10px;
+            margin-bottom: 20px;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card" id="main-card">
+        <div class="main-gif-container">🌸   🧸   ✨</div>
+        <h1>Hey, listen closely...</h1>
+        <p>I have a tiny secret to share with you, and it involves a bunch of reasons why you are completely amazing.</p>
+        
+        <div class="cute-box" id="reason-display" onclick="changeReason()">
+            Tap here to peek inside... 👉👈
+        </div>
+        <span class="sparkle-text">✨ (Keep tapping for more) ✨</span>
+
+        <p style="font-weight: 600; color: #ff477e; margin-bottom: 15px;">So... will you be my girlfriend and make me the luckiest person ever? 🥺💕</p>
+        
+        <div class="btn-container">
+            <button id="yes-btn" onclick="celebrate()">Yes! 💕</button>
+            <button id="no-btn" onmouseover="moveButton()" onclick="moveButton()">No u</button>
+        </div>
+    </div>
+
+    <div class="card hidden" id="success-card">
+        <div class="main-gif-container" style="animation: bounce 0.8s infinite ease-in-out;">🐱   💝   🎉</div>
+        <h1>YAAAY! You said YES! 🥳</h1>
+        <p>My heart is literally doing backflips right now! Best day ever. Get ready for all the sweet texts and fun dates ahead! ✨🍭</p>
+    </div>
+
+    <script>
+        // --- CUSTOMIZABLE CUTE REASONS ---
+        const cuteReasons = [
+            "You have the prettiest smile that instantly melts my heart. 🍰",
+            "I love the way your eyes light up whenever you talk about things you love. ⭐",
+            "You're incredibly kind, sweet, and just being around you makes me happy. 🧸",
+            "Your laugh is genuinely my favorite sound in the whole universe. 🎵",
+            "You are a precious human bean and I just want to make you happy! 🍓"
+        ];
+        
+        let reasonIndex = 0;
+
+        function changeReason() {
+            const box = document.getElementById('reason-display');
+            box.style.transform = 'scale(0.92) rotate(1deg)';
+            setTimeout(() => {
+                box.textContent = cuteReasons[reasonIndex];
+                box.style.transform = 'scale(1)';
+                reasonIndex = (reasonIndex + 1) % cuteReasons.length;
+            }, 100);
+        }
+
+        // --- THE SNEAKY RUNAWAY NO BUTTON ---
+        function moveButton() {
+            const noBtn = document.getElementById('no-btn');
+            const padding = 70;
+            
+            const maxX = window.innerWidth - noBtn.offsetWidth - padding;
+            const maxY = window.innerHeight - noBtn.offsetHeight - padding;
+            
+            noBtn.style.position = 'fixed';
+            
+            const randomX = Math.max(padding, Math.floor(Math.random() * maxX));
+            const randomY = Math.max(padding, Math.floor(Math.random() * maxY));
+            
+            noBtn.style.left = randomX + 'px';
+            noBtn.style.top = randomY + 'px';
+        }
+
+        // --- THE MASSIVE CELEBRATION SHOWER ---
+        function celebrate() {
+            document.getElementById('main-card').classList.add('hidden');
+            document.getElementById('success-card').classList.remove('hidden');
+            
+            // Pop an adorable pink/pastel confetti explosion!
+            var end = Date.now() + (4 * 1000);
+            var colors = ['#ffbccb', '#ffccd5', '#ff477e', '#ffccd5', '#fff0f3'];
+
+            (function frame() {
+                confetti({
+                    particleCount: 3,
+                    angle: 60,
+                    spread: 60,
+                    origin: { x: 0 },
+                    colors: colors
+                });
+                confetti({
+                    particleCount: 3,
+                    angle: 120,
+                    spread: 60,
+                    origin: { x: 1 },
+                    colors: colors
+                });
+
+                if (Date.now() < end) {
+                    requestAnimationFrame(frame);
+                }
+            }());
+        }
+
+        // --- SPAWNING CUTE BACKGROUND FLOATING ELEMENTS ---
+        const cuteEmojis = ['🌸', '🍓', '🧸', '✨', '🐾', '💭', '🎀'];
+        
+        function createFloatingElement() {
+            const element = document.createElement('div');
+            element.classList.add('floating-element');
+            element.innerHTML = cuteEmojis[Math.floor(Math.random() * cuteEmojis.length)];
+            element.style.left = Math.random() * 95 + 'vw';
+            element.style.animationDuration = Math.random() * 4 + 4 + 's'; // 4-8 seconds
+            element.style.fontSize = Math.random() * 15 + 20 + 'px'; // 20px - 35px
+            document.body.appendChild(element);
+
+            setTimeout(() => {
+                element.remove();
+            }, 8000);
+        }
+        setInterval(createFloatingElement, 400);
+    </script>
+</body>
+</html>
